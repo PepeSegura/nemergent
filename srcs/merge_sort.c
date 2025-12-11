@@ -19,20 +19,33 @@ t_lst	*get_middle(t_lst *lst)
 
 t_lst	*sorted_merge(t_lst *left, t_lst *right)
 {
+	t_lst	new_head = {0};
+	t_lst	*new_end;
+
 	if (left == NULL)
 		return (right);
 	if (right == NULL)
 		return (left);
-	if (left->content <= right->content)
+	new_end = &new_head;
+	while (left && right)
 	{
-		left->next = sorted_merge(left->next, right);
-		return (left);
+		if (left->content <= right->content)
+		{
+			new_end->next = left;
+			left = left->next;
+		}
+		else
+		{
+			new_end->next = right;
+			right = right->next;
+		}
+		new_end = new_end->next;
 	}
+	if (left)
+		new_end->next = left;
 	else
-	{
-		right->next = sorted_merge(left, right->next);
-		return (right);
-	}
+		new_end->next = right;
+	return (new_head.next);
 }
 
 void	merge_sort(t_lst **lst)
