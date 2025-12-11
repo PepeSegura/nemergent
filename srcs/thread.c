@@ -20,13 +20,13 @@ void	*gen_and_insert_nbrs(void *arg)
 		if (new_nbr < 0)
 		{
 			pthread_mutex_lock(&main->mutex_n);
-			lst_add_back(&main->lst_neg, new_node);
+			lst_add_front(&main->lst_neg, new_node);
 			pthread_mutex_unlock(&main->mutex_n);
 		}
 		else
 		{
 			pthread_mutex_lock(&main->mutex_p);
-			lst_add_back(&main->lst_pos, new_node);
+			lst_add_front(&main->lst_pos, new_node);
 			pthread_mutex_unlock(&main->mutex_p);
 		}
 		retval->generated++;

@@ -39,6 +39,7 @@ int		create_lists(t_main_struct *main_struct);
 t_lst	*lst_new(int content);
 t_lst	*lst_last(t_lst *lst);
 void	lst_add_back(t_lst **lst, t_lst *node);
+void	lst_add_front(t_lst **lst, t_lst *node);
 void	lst_clear(t_lst **lst);
 void	*print_node(void *context);
 void	lst_iter(t_lst **lst, void *(func)(void *context));

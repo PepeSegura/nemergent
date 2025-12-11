@@ -39,6 +39,22 @@ void	lst_add_back(t_lst **lst, t_lst *node)
 	last->next = node;
 }
 
+void	lst_add_front(t_lst **lst, t_lst *node)
+{
+	if (lst == NULL)
+	{
+		lst = &node;
+		return ;
+	}
+	if (*lst == NULL)
+	{
+		*lst = node;
+		return ;
+	}
+	node->next = *lst;
+	*lst = node;
+}
+
 void	lst_clear(t_lst **lst)
 {
 	t_lst	*aux;

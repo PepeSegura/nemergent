@@ -22,8 +22,6 @@ void	destroy_mutex(t_main_struct *main_struct)
 	pthread_mutex_destroy(&main_struct->mutex_p);
 }
 
-void	merge_sort2(t_lst **lst);
-
 int	main(int argc, char **argv)
 {
 	t_main_struct	main_struct = {0};
