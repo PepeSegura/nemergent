@@ -22,6 +22,8 @@ void	destroy_mutex(t_main_struct *main_struct)
 	pthread_mutex_destroy(&main_struct->mutex_p);
 }
 
+void	merge_sort2(t_lst **lst);
+
 int	main(int argc, char **argv)
 {
 	t_main_struct	main_struct = {0};
@@ -41,10 +43,15 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 
+	merge_sort(&main_struct.lst_neg);
+	merge_sort(&main_struct.lst_pos);
+
 	lst_iter(&main_struct.lst_neg, print_node);
 	lst_iter(&main_struct.lst_pos, print_node);
-	// print_lists(&main_struct);
-	// clear_lists(&main_struct);
+
+	lst_clear(&main_struct.lst_neg);
+	lst_clear(&main_struct.lst_pos);
+
 	destroy_mutex(&main_struct);
 	return (0);
 }

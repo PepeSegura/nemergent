@@ -7,6 +7,7 @@ SRCS =						\
 		srcs/parser.c		\
 		srcs/thread.c		\
 		srcs/lst.c			\
+		srcs/merge_sort.c	\
 		srcs/utils.c		\
 
 OBJS = $(SRCS:%.c=objs/%.o)

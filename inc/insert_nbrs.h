@@ -43,6 +43,9 @@ void	lst_clear(t_lst **lst);
 void	*print_node(void *context);
 void	lst_iter(t_lst **lst, void *(func)(void *context));
 
+/* merge_sort.c */
+void	merge_sort(t_lst **lst);
+
 /* utils.c */
 unsigned	create_srandom_seed(void);
 int			gen_nbr(void);
