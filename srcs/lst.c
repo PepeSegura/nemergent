@@ -1,95 +1,75 @@
 #include "insert_nbrs.h"
 
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <limits.h>
-
-#define RANDOM_FILENAME "/dev/urandom"
-
-unsigned	create_seed(void)
+t_lst	*lst_new(int content)
 {
-	int	fd = open(RANDOM_FILENAME, O_RDONLY);
+	t_lst	*lst;
 
-	if (fd == -1)
-	{
-		dprintf(2, "There was creating a random seed. Seed = 1\n");
-		return (1);
-	}
-
-	unsigned seed;
-
-	if (read(fd, &seed, sizeof(seed)) == -1)
-	{
-		dprintf(2, "There was creating a random seed. Seed = 1\n");
-		close(fd);
-		return (1);
-	}
-	close(fd);
-	return (seed);
+	lst = malloc(sizeof(t_lst));
+	if (lst == NULL)
+		return (NULL);
+	lst->content = content;
+	lst->next = NULL;
+	return (lst);
 }
 
-int	gen_nbr()
+t_lst	*lst_last(t_lst *lst)
 {
-	const long	range = (long)INT_MAX - (long)INT_MIN + 1;
-
-	return ((random() * range) / RAND_MAX);
+	while (lst && lst->next)
+	{
+		lst = lst->next;
+	}
+	return (lst);
 }
 
-
-typedef struct s_retval
+void	lst_add_back(t_lst **lst, t_lst *node)
 {
-	int a;
-	int b;
-} t_retval;
+	t_lst	*last;
 
-
-void *gen_x_nbrs(void *arg)
-{
-	int nbrs_ammount = (int)(long)(int *)arg;
-
-	for (int i = 0; i < nbrs_ammount; ++i)
+	if (lst == NULL)
 	{
-		printf("Generated nbr: %d\n", gen_nbr());
+		lst = &node;
+		return ;
 	}
+	if (*lst == NULL)
+	{
+		*lst = node;
+		return ;
+	}
+	last = lst_last(*lst);
+	last->next = node;
+}
 
-	t_retval *retval = calloc(sizeof(t_retval), 1);
-	if (retval == NULL)
-		pthread_exit(NULL);
-	retval->a = 1;
-	retval->b = 2;
-	pthread_exit(retval);
+void	lst_clear(t_lst **lst)
+{
+	t_lst	*aux;
+
+	while (lst && *lst)
+	{
+		aux = (*lst)->next;
+		free(*lst);
+		*lst = aux;
+	}
+}
+
+void	*print_node(void *context)
+{
+	t_lst	*node;
+
+	node = (t_lst *)context;
+	printf("%d\n", node->content);
 	return (NULL);
 }
 
-int create_lists(t_main_struct *main_struct)
+void	lst_iter(t_lst **lst, void *(func)(void *context))
 {
-	unsigned seed = create_seed();
+	t_lst	*aux;
 
-	srandom(seed);
-
-	pthread_t	*threads = calloc(sizeof(pthread_t), main_struct->threads_ammount);
-	if (threads == NULL)
+	if (lst == NULL)
+		return ;
+	aux = *lst;
+	while (aux)
 	{
-		perror("malloc");
-		return (1);
+		func((void *)(aux));
+		aux = aux->next;
 	}
-
-	for (int i = 0; i < main_struct->threads_ammount; ++i)
-	{
-		pthread_create(&threads[i], NULL, gen_x_nbrs, (void *)(long)main_struct->nbrs_per_thread);
-	}
-
-	for (int i = 0; i < main_struct->threads_ammount; ++i)
-	{
-		t_retval *ret = NULL;
-
-		pthread_join(threads[i], (void *)&ret);
-		printf("retval: %d %d\n", ret->a, ret->b);
-		if (ret != NULL)
-			free(ret);
-	}
-
-	free(threads);
-	return (0);
 }

@@ -5,7 +5,9 @@ NAME = insert_nbrs
 SRCS =						\
 		srcs/main.c			\
 		srcs/parser.c		\
-		srcs/lst.c
+		srcs/thread.c		\
+		srcs/lst.c			\
+		srcs/utils.c		\
 
 OBJS = $(SRCS:%.c=objs/%.o)
 
