@@ -6,7 +6,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define USAGE "Usage: ./insert_numbers <number of threads> <ammount of generated numbers per thread>"
+# define USAGE "Usage: ./insert_numbers <threads> <numbers_per_thread>"
 
 typedef struct s_lst
 {

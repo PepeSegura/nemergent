@@ -3,6 +3,7 @@ MAKEFLAGS = --silent
 NAME = insert_nbrs
 
 SRCS =						\
+		tests/main.c		\
 		srcs/main.c			\
 		srcs/parser.c		\
 		srcs/thread.c		\
@@ -34,4 +35,8 @@ clean:
 
 re: clean all
 
-.PHONY: all clean re
+clean_all: clean clean_test
+
+.PHONY: all clean re clean_all
+
+-include tests/Makefile
