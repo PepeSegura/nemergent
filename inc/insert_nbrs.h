@@ -8,25 +8,30 @@
 
 # define USAGE "Usage: ./insert_numbers <threads> <numbers_per_thread>"
 
+// Definition of the list of numbers
+// It was the content (the generated number) and a pointer to the next node
 typedef struct s_lst
 {
 	int				content;
 	struct s_lst	*next;
 }	t_lst;
 
+// Struct used for sending from the threads to the main thread the number of generated numbers in each thread
+// It will be used to check if all the numbers where generated correctly
 typedef struct s_retval
 {
 	int	generated;
 }	t_retval;
 
+// Struct for the whole program, it has the 2 lists (positives, negatives)
 typedef struct s_main_struct
 {
-	int				threads_ammount;
-	int				nbrs_per_thread;
-	t_lst			*lst_neg;
-	t_lst			*lst_pos;
-	pthread_mutex_t	mutex_n;
-	pthread_mutex_t	mutex_p;
+	int				threads_amount;		// argv[1]
+	int				numbers_per_thread;	// argv[2]
+	t_lst			*lst_neg;			// list where negative numbers will be stored
+	t_lst			*lst_pos;			// list where positive numbers will be stored
+	pthread_mutex_t	mutex_n;			// mutex to protect writes/reads in the list of negative numbers
+	pthread_mutex_t	mutex_p;			// mutex to protect writes/reads in the list of positive numbers
 }	t_main_struct;
 
 /* parser.c */

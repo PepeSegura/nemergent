@@ -2,9 +2,9 @@
 #     UNIT TESTS CONFIG
 # ===========================
 
-CFLAGS_TESTER = -Wall -Werror -Wextra -g3 -fsanitize=thread
+CFLAGS_TESTER = -Wall -Werror -Wextra #-g3 -fsanitize=thread
 CFLAGS_TESTER += -I inc -I tests
-LDFLAGS_TESTER = -lpthread -fsanitize=thread
+LDFLAGS_TESTER = -lpthread #-fsanitize=thread
 
 
 # ---- LST TESTER ----

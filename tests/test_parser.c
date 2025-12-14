@@ -25,8 +25,8 @@ void	test_parser_valid_input(void)
 	int	res = parser(&ms, 3, argv);
 
 	TEST_ASSERT_EQUAL_INT(0, res);
-	TEST_ASSERT_EQUAL_INT(4, ms.threads_ammount);
-	TEST_ASSERT_EQUAL_INT(100, ms.nbrs_per_thread);
+	TEST_ASSERT_EQUAL_INT(4, ms.threads_amount);
+	TEST_ASSERT_EQUAL_INT(100, ms.numbers_per_thread);
 }
 
 void	test_parser_invalid_argc_low(void)
@@ -56,7 +56,7 @@ void	test_parser_non_numeric_thread_count(void)
 	TEST_ASSERT_EQUAL_INT(1, res);
 }
 
-void	test_parser_non_numeric_nbrs_per_thread(void)
+void	test_parser_non_numeric_numbers_per_thread(void)
 {
 	char	*argv[] = {"./insert_nbrs", "5", "xyz", NULL};
 
@@ -90,8 +90,8 @@ void	test_parser_large_numbers(void)
 	int res = parser(&ms, 3, argv);
 
 	TEST_ASSERT_EQUAL_INT(0, res);
-	TEST_ASSERT_EQUAL_INT(999999, ms.threads_ammount);
-	TEST_ASSERT_EQUAL_INT(888888, ms.nbrs_per_thread);
+	TEST_ASSERT_EQUAL_INT(999999, ms.threads_amount);
+	TEST_ASSERT_EQUAL_INT(888888, ms.numbers_per_thread);
 }
 
 int	main(void)
@@ -104,7 +104,7 @@ int	main(void)
 	RUN_TEST(test_parser_invalid_argc_low);
 	RUN_TEST(test_parser_invalid_argc_high);
 	RUN_TEST(test_parser_non_numeric_thread_count);
-	RUN_TEST(test_parser_non_numeric_nbrs_per_thread);
+	RUN_TEST(test_parser_non_numeric_numbers_per_thread);
 	RUN_TEST(test_parser_zero_values);
 	RUN_TEST(test_parser_negative_values);
 	RUN_TEST(test_parser_large_numbers);

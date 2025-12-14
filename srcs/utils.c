@@ -7,6 +7,11 @@
 
 #define RANDOM_FILENAME "/dev/urandom"
 
+/**
+ * @brief Create a srandom seed by reading 4 bytes from /dev/urandom
+ * 
+ * @return unsigned 
+ */
 unsigned	create_srandom_seed(void)
 {
 	const int	fd = open(RANDOM_FILENAME, O_RDONLY);
@@ -27,6 +32,11 @@ unsigned	create_srandom_seed(void)
 	return (seed);
 }
 
+/**
+ * @brief Generate a random number in the INT_MIN - INT_MAX range
+ * 
+ * @return int 
+ */
 int	gen_nbr()
 {
 	const long	range = (long)INT_MAX - (long)INT_MIN + 1;

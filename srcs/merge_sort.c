@@ -1,6 +1,6 @@
 #include "insert_nbrs.h"
 
-t_lst	*get_middle(t_lst *lst)
+static t_lst	*get_middle(t_lst *lst)
 {
 	t_lst	*slow;
 	t_lst	*fast;
@@ -17,7 +17,7 @@ t_lst	*get_middle(t_lst *lst)
 	return (slow);
 }
 
-t_lst	*sorted_merge(t_lst *left, t_lst *right)
+static t_lst	*sorted_merge(t_lst *left, t_lst *right)
 {
 	t_lst	new_head = {0};
 	t_lst	*new_end;
@@ -48,6 +48,12 @@ t_lst	*sorted_merge(t_lst *left, t_lst *right)
 	return (new_head.next);
 }
 
+
+/**
+ * @brief Sorting algorithm
+ * 
+ * @param lst 
+ */
 void	merge_sort(t_lst **lst)
 {
 	t_lst	*left;

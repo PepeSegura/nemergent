@@ -1,5 +1,11 @@
 #include "insert_nbrs.h"
 
+/**
+ * @brief Function to create a node with the content received as an argument
+ * 
+ * @param content 
+ * @return t_lst* 
+ */
 t_lst	*lst_new(int content)
 {
 	t_lst	*lst;
@@ -12,6 +18,13 @@ t_lst	*lst_new(int content)
 	return (lst);
 }
 
+
+/**
+ * @brief Function that returns the last node of the list
+ * 
+ * @param lst 
+ * @param node 
+ */
 t_lst	*lst_last(t_lst *lst)
 {
 	while (lst && lst->next)
@@ -21,6 +34,12 @@ t_lst	*lst_last(t_lst *lst)
 	return (lst);
 }
 
+/**
+ * @brief Function for adding a node at the end of the list
+ * 
+ * @param lst 
+ * @param node 
+ */
 void	lst_add_back(t_lst **lst, t_lst *node)
 {
 	t_lst	*last;
@@ -39,6 +58,13 @@ void	lst_add_back(t_lst **lst, t_lst *node)
 	last->next = node;
 }
 
+
+/**
+ * @brief Function for adding a node at the front of the list
+ * 
+ * @param lst 
+ * @param node 
+ */
 void	lst_add_front(t_lst **lst, t_lst *node)
 {
 	if (lst == NULL)
@@ -55,6 +81,11 @@ void	lst_add_front(t_lst **lst, t_lst *node)
 	*lst = node;
 }
 
+/**
+ * @brief Function to clear a list
+ * 
+ * @param lst 
+ */
 void	lst_clear(t_lst **lst)
 {
 	t_lst	*aux;
@@ -67,6 +98,13 @@ void	lst_clear(t_lst **lst)
 	}
 }
 
+
+/**
+ * @brief Function send to lst_iter for printing the content of a node
+ * 
+ * @param context 
+ * @return void* 
+ */
 void	*print_node(void *context)
 {
 	t_lst	*node;
@@ -76,6 +114,13 @@ void	*print_node(void *context)
 	return (NULL);
 }
 
+
+/**
+ * @brief Function that iterates a list applying the received function to every node
+ * 
+ * @param lst 
+ * @param func 
+ */
 void	lst_iter(t_lst **lst, void *(func)(void *context))
 {
 	t_lst	*aux;
